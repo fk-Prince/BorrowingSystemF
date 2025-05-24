@@ -9,107 +9,94 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using BorrowingSystem;
+using MySql.Data.MySqlClient;
 
 namespace BorrowingSystem
 {
-
     public partial class LoginForm : Form
     {
         public static LoginForm instance;
+        private readonly DatabaseConnection dbConnection;  // Add reference to your DbConn class
+
         public LoginForm()
         {
             InitializeComponent();
 
             this.Load += Form1_Load;
-
-            instance = this; 
+            instance = this;
             this.MinimizeBox = true;
             this.MaximizeBox = false;
 
-
-             
-
+            dbConnection = new DatabaseConnection();
         }
+        public static string CurrentUser { get; private set; }
 
-        private void loginButton_Click(object sender, EventArgs e)
+        // In your successful login code:
+        private void SuccessfulLogin(string username)
         {
-
-        }
-
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void panel2_Paint(object sender, PaintEventArgs e)
-        {
-            panel2.BackColor = Color.FromArgb(15, 255, 255, 255);
-        }
-
-        private void panel1_Paint_1(object sender, PaintEventArgs e)
-        {
-            
-        }
-
-        private void textBox1_TextChanged_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void cancelButton_Click(object sender, EventArgs e)
-        {
-            this.Close();
+            CurrentUser = username;  // Set the current user
+            Dashboard dashboard = new Dashboard();
+            dashboard.Show();
+            this.Hide();
         }
 
 
+      
         private void btnLogin_Click(object sender, EventArgs e)
         {
-             
-            if (string.IsNullOrWhiteSpace(username.Text) || string.IsNullOrWhiteSpace(password.Text))
+            string usernameInput = username.Text;
+            string passwordInput = password.Text;
+
+            // Validate that fields are not empty
+            if (string.IsNullOrWhiteSpace(usernameInput) || string.IsNullOrWhiteSpace(passwordInput))
             {
                 MessageBox.Show("Don't leave blank space", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
-            else if (username.Text == "admin" && password.Text == "password")  
+
+            // Database connection to check user credentials
+            try
             {
-                Dashboard form = new Dashboard();
-                form.Show();  
+                using (var conn = dbConnection.GetConnection())
+                {
+                    conn.Open();
+                    string query = "SELECT username FROM users WHERE username = @username AND password_hash = @password_hash LIMIT 1";
+                    using (var cmd = new MySqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@username", usernameInput);
+                        cmd.Parameters.AddWithValue("@password_hash", passwordInput);
 
-                this.Hide();  
+                        using (MySqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            if (reader.Read()) 
+                            {
+                                MessageBox.Show("Login successful!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                Dashboard form = new Dashboard();
+                                form.Show();
+                                this.Hide();
+                            }
+                            else
+                            {
+                                MessageBox.Show("Invalid username or password.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
+                        }
+                    }
+                }
             }
-            else
+            catch (MySqlException ex)
             {
-                MessageBox.Show("Invalid username or password.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Error: " + ex.Message, "Database Connection Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
-
-        private void pictureBox2_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void password_TextChanged(object sender, EventArgs e)
         {
-            password.PasswordChar = '*';
+            password.PasswordChar = '*';  
+        }
+
+        private void cancelButton_Click(object sender, EventArgs e)
+        {
+            this.Close();  
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -131,7 +118,12 @@ namespace BorrowingSystem
 
             btnCancel.Region = Region.FromHrgn(dll.CreateRoundRectRgn(0, 0, btnCancel.Width, btnCancel.Height, 30, 30));
 
-            
+
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+             this.Close();  
         }
     }
 }

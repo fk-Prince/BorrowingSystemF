@@ -44,7 +44,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.btnRecords = new System.Windows.Forms.Button();
-            this.searchBar = new System.Windows.Forms.TextBox();
+            this.txtSearch = new System.Windows.Forms.TextBox();
             this.welcome = new System.Windows.Forms.Label();
             this.btnManageE = new System.Windows.Forms.Button();
             this.btnBorrow = new System.Windows.Forms.Button();
@@ -70,7 +70,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(981, 411);
             this.panel1.TabIndex = 0;
-            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // panel3
             // 
@@ -91,7 +90,7 @@
             this.panel3.Controls.Add(this.label2);
             this.panel3.Controls.Add(this.label1);
             this.panel3.Controls.Add(this.btnRecords);
-            this.panel3.Controls.Add(this.searchBar);
+            this.panel3.Controls.Add(this.txtSearch);
             this.panel3.Controls.Add(this.welcome);
             this.panel3.Controls.Add(this.btnManageE);
             this.panel3.Controls.Add(this.btnBorrow);
@@ -100,7 +99,6 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(938, 375);
             this.panel3.TabIndex = 0;
-            this.panel3.Paint += new System.Windows.Forms.PaintEventHandler(this.panel3_Paint);
             // 
             // pictureBox7
             // 
@@ -111,7 +109,6 @@
             this.pictureBox7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox7.TabIndex = 19;
             this.pictureBox7.TabStop = false;
-            this.pictureBox7.Click += new System.EventHandler(this.pictureBox7_Click_1);
             // 
             // pictureBox6
             // 
@@ -209,7 +206,6 @@
             this.time.Size = new System.Drawing.Size(39, 16);
             this.time.TabIndex = 8;
             this.time.Text = "Time";
-            this.time.Click += new System.EventHandler(this.time_Click);
             // 
             // btnsearch
             // 
@@ -221,7 +217,6 @@
             this.btnsearch.TabIndex = 5;
             this.btnsearch.Text = "Search";
             this.btnsearch.UseVisualStyleBackColor = false;
-            this.btnsearch.Click += new System.EventHandler(this.button1_Click_2);
             // 
             // date
             // 
@@ -233,7 +228,6 @@
             this.date.Size = new System.Drawing.Size(36, 16);
             this.date.TabIndex = 7;
             this.date.Text = "Date";
-            this.date.Click += new System.EventHandler(this.label1_Click);
             // 
             // label2
             // 
@@ -245,7 +239,6 @@
             this.label2.Size = new System.Drawing.Size(44, 16);
             this.label2.TabIndex = 10;
             this.label2.Text = "Time:";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // label1
             // 
@@ -257,7 +250,6 @@
             this.label1.Size = new System.Drawing.Size(41, 16);
             this.label1.TabIndex = 9;
             this.label1.Text = "Date:";
-            this.label1.Click += new System.EventHandler(this.label1_Click_1);
             // 
             // btnRecords
             // 
@@ -272,19 +264,18 @@
             this.btnRecords.UseVisualStyleBackColor = false;
             this.btnRecords.Click += new System.EventHandler(this.btnRecords_Click);
             // 
-            // searchBar
+            // txtSearch
             // 
-            this.searchBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(217)))), ((int)(((byte)(217)))));
-            this.searchBar.Font = new System.Drawing.Font("Mongolian Baiti", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.searchBar.ForeColor = System.Drawing.Color.Black;
-            this.searchBar.Location = new System.Drawing.Point(277, 20);
-            this.searchBar.Multiline = true;
-            this.searchBar.Name = "searchBar";
-            this.searchBar.Size = new System.Drawing.Size(344, 27);
-            this.searchBar.TabIndex = 7;
-            this.searchBar.Text = "Search Equipment...";
-            this.searchBar.UseWaitCursor = true;
-            this.searchBar.TextChanged += new System.EventHandler(this.textBox1_TextChanged_1);
+            this.txtSearch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(217)))), ((int)(((byte)(217)))));
+            this.txtSearch.Font = new System.Drawing.Font("Mongolian Baiti", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSearch.ForeColor = System.Drawing.Color.Black;
+            this.txtSearch.Location = new System.Drawing.Point(277, 20);
+            this.txtSearch.Multiline = true;
+            this.txtSearch.Name = "txtSearch";
+            this.txtSearch.Size = new System.Drawing.Size(344, 27);
+            this.txtSearch.TabIndex = 7;
+            this.txtSearch.Text = "Search Equipment...";
+            this.txtSearch.UseWaitCursor = true;
             // 
             // welcome
             // 
@@ -296,7 +287,6 @@
             this.welcome.Size = new System.Drawing.Size(313, 42);
             this.welcome.TabIndex = 6;
             this.welcome.Text = "Welcome, Admin";
-            this.welcome.Click += new System.EventHandler(this.welcome_Click);
             // 
             // btnManageE
             // 
@@ -309,7 +299,7 @@
             this.btnManageE.TabIndex = 0;
             this.btnManageE.Text = " MANAGE EQUIPMENT";
             this.btnManageE.UseVisualStyleBackColor = false;
-            this.btnManageE.Click += new System.EventHandler(this.btnView_Click);
+            this.btnManageE.Click += new System.EventHandler(this.btnManageE_Click);
             // 
             // btnBorrow
             // 
@@ -322,7 +312,7 @@
             this.btnBorrow.TabIndex = 3;
             this.btnBorrow.Text = "BORROW EQUIPMENT";
             this.btnBorrow.UseVisualStyleBackColor = false;
-            this.btnBorrow.Click += new System.EventHandler(this.btnNew_Click);
+            this.btnBorrow.Click += new System.EventHandler(this.btnBorrow_Click);
             // 
             // btnManageU
             // 
@@ -333,7 +323,7 @@
             this.btnManageU.Name = "btnManageU";
             this.btnManageU.Size = new System.Drawing.Size(154, 43);
             this.btnManageU.TabIndex = 1;
-            this.btnManageU.Text = "MANAGE USERS";
+            this.btnManageU.Text = "MANAGE BORROWERS";
             this.btnManageU.UseVisualStyleBackColor = false;
             this.btnManageU.Click += new System.EventHandler(this.btnManage_Click);
             // 
@@ -351,7 +341,7 @@
             this.Name = "Dashboard";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Dashboard";
-            this.Load += new System.EventHandler(this.Form2_Load);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.closeform);
             this.panel1.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
@@ -379,7 +369,7 @@
         private System.Windows.Forms.Button btnRecords;
         private System.Windows.Forms.Button btnBorrow;
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.TextBox searchBar;
+        private System.Windows.Forms.TextBox txtSearch;
         private System.Windows.Forms.Button btnManageE;
         private System.Windows.Forms.Button btnReturn;
         private System.Windows.Forms.Button btnPayment;

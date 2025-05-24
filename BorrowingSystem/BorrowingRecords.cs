@@ -60,13 +60,13 @@ namespace BorrowingSystem
 
             btnClose.Region = Region.FromHrgn(dll.CreateRoundRectRgn(0, 0, btnClose.Width, btnClose.Height, 30, 30));
 
-            btnFilters.FlatStyle = FlatStyle.Flat;
-            btnFilters.FlatAppearance.BorderSize = 2;
-            btnFilters.BackColor = ColorTranslator.FromHtml("#0066CC");
-            btnFilters.FlatAppearance.MouseOverBackColor = ColorTranslator.FromHtml("#89CFF0");
-            btnFilters.ForeColor = Color.White;
+            btnApply.FlatStyle = FlatStyle.Flat;
+            btnApply.FlatAppearance.BorderSize = 2;
+            btnApply.BackColor = ColorTranslator.FromHtml("#0066CC");
+            btnApply.FlatAppearance.MouseOverBackColor = ColorTranslator.FromHtml("#89CFF0");
+            btnApply.ForeColor = Color.White;
 
-            btnFilters.Region = Region.FromHrgn(dll.CreateRoundRectRgn(0, 0, btnFilters.Width, btnFilters.Height, 5, 5));
+            btnApply.Region = Region.FromHrgn(dll.CreateRoundRectRgn(0, 0, btnApply.Width, btnApply.Height, 5, 5));
         }
 
         private void btnClose_Click(object sender, EventArgs e)
@@ -100,6 +100,10 @@ namespace BorrowingSystem
         private void label3_Click(object sender, EventArgs e)
         {
 
+        }
+        private void closeform(object sender, FormClosingEventArgs e)
+        {
+            Application.Exit();
         }
     }
 }
